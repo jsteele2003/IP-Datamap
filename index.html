@@ -1,11 +1,137 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 <script src="node_modules/datamaps/dist/datamaps.world.min.js"></script>
+<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+
 <div id="container" style="position: relative; width: 500px; height: 300px;"></div>
 <script>
-    var map = new Datamap({element: document.getElementById('container')});
+        var election = new Datamap({
+        scope: 'world',
+        element: document.getElementById('container'),
+        projection: 'mercator',
+        arcConfig: {
+            popupOnHover: true,
+            // animationSpeed: 600,
+        }
+      });
+
+    var ipBuffer = [];
+    var ipArc = [
+        {
+            
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 32.066667,
+                longitude: 34.783333 
+            }
+        },
+        {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 19.433333,
+                longitude: -99.133333
+            }
+        },
+        {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 9.933333,
+                longitude: -84.083333
+            }
+        },
+        {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 54.597 ,
+                longitude: -5.93
+            }
+        },
+        {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 52.516667,
+                longitude: 13.383333 
+            }
+        },
+        {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 14.692778,
+                longitude: -17.446667
+            }
+        },
+        {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: -26.204444,
+                longitude: 28.045556
+            }
+        },
+                {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: -6.8,
+                longitude: 39.283333 
+            }
+        },
+                {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 59.329444,
+                longitude: 18.068611
+            }
+        },
+                {
+            origin: {
+                latitude: 38.895111,
+                longitude: -77.036667
+            },
+            destination: {
+                latitude: 59.95 ,
+                longitude: 30.3
+            }
+        }
+    ];
     
-    d3.tsv("data/browserData.tsv", function(data) {
-        console.log(data[1000]);
-    });
+  election.arc( ipBuffer, {strokeWidth: 2});
+  for(var i = 0; i < ipArc.length; i++){
+      updateArcs(i);
+  }
+  
+  function updateArcs(index){
+      setTimeout(function(){
+          console.log(index);
+          console.log(ipBuffer)
+          ipBuffer.push(ipArc[index]);
+          election.arc( ipBuffer, {strokeWidth: 2});
+      }, 1000 + 1000*i);
+  }
+    
 </script>
